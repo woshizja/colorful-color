@@ -1,0 +1,114 @@
+.score-layer{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.score-layer .wrap{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-wrap:wrap;
+  width:100%;
+  text-align: center;
+  background-color: rgba(255,255,255,0.95);
+  will-change: transform;
+}
+.score-layer.show .wrap{
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  height: 100%;
+  transform: translateY(100%);
+  animation: show 600ms ease 1 forwards;
+}
+
+.score-layer.show .wrap .btn_tip_wrap{
+  display: block;
+}
+
+@keyframes show {
+  100%{
+    transform: translateY(0%);
+  }
+}
+
+.wrap .btn_tip_wrap{
+  display: none;
+  width:100%;
+  text-align:center;
+}
+.wrap .btn_tip_wrap.scored .btn{
+  border:1px solid #168617;
+  color:#168617;
+}
+.wrap .btn_tip_wrap .btn{
+  width:100px;
+  height:30px;
+  margin-bottom: 15px;
+  outline:none;
+  border:1px solid #666;
+  border-radius:4px;
+  color:#666;
+  background-color:#fff;
+  font-size: 13px;
+}
+.wrap .btn_tip_wrap .tip{
+  box-sizing: border-box;
+  width:100%;
+  color:#aaa;
+  font-size:12px;
+  font-style: italic;
+  text-align: center;
+}
+.wrap .btn_tip_wrap .tip p{
+  line-height: 140%;
+  margin:3px 0;
+}
+.circle{
+  width:100vw;
+  max-width: 450px;
+  height:100vw;
+  max-height:450px;
+  padding:5px;
+}
+
+.circle .c0{
+  stroke:none;
+  stroke-width:0;
+  fill: url("#basic0");
+}
+
+.circle .c1{
+  stroke:#none;
+  stroke-width:0;
+  fill:url("#basic1");
+  stroke-linecap:round;
+}
+
+.circle .c2{
+  stroke:#none;
+  stroke-width:0;
+  fill:url("#basic2");
+  stroke-linecap:round;
+  transform:rotate(20deg);
+  transform-origin:50% 50%;
+}
+
+.circle .c3{
+  stroke:none;
+  stroke-width:0;
+  fill:url("#basic3");
+  stroke-linecap:round;
+  transform:rotate(40deg);
+  transform-origin:50% 50%;
+}
+
+.circle .scores{
+  fill:#666;
+  stroke:none;
+  stroke-width:0;
+  font-family:"Times New Roman",Georgia,Serif;
+  font-size:10px;
+  font-style:italic;
+}

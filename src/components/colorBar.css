@@ -1,0 +1,18 @@
+.color-bar {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.color-bar .color-wrap {
+    width: 90%;
+    max-width: 1024px;
+}
+
+.color-wrap .color {
+    height: 80px;
+    border-radius: 4px;
+    background-color: #f0f0f0;
+    box-shadow: 0 20px 20px -15px rgba(0, 0, 0, .4);
+}

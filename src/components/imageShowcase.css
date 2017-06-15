@@ -1,0 +1,158 @@
+.head {
+    height: 80px;
+    line-height: 80px;
+    margin: 0;
+    padding: 0 15px;
+    border-bottom: 1px solid #999;
+    text-align: left;
+    color: #666;
+    font-size: 24px;
+    user-select: none;
+    position: relative;
+    z-index: -1;
+}
+
+.head:before {
+    content: '';
+    width: 7px;
+    height: 70%;
+    background: #30983F;
+    position: absolute;
+    top: 15%;
+    left: 0;
+}
+
+.image-showcase {
+    margin-bottom: 50px;
+    text-align: center;
+}
+
+.showcase-wrap {
+    position: relative;
+    z-index: -10;
+    font-size: 0;
+    background-color: #eef;
+    overflow: hidden;
+}
+
+.showcase-wrap::after {
+    content: '';
+    position: absolute;
+    z-index: -5;
+    top: -100%;
+    left: -100%;
+    bottom: -100%;
+    right: -100%;
+    background: -webkit-linear-gradient(45deg, #fcc, #cfc, #ccf);
+    background-size: 100% 100%;
+    background-position: 0 0;
+    animation: bg 8s infinite linear alternate;
+    transform: translate(30%, 30%);
+    will-change: transform;
+}
+.showcase-wrap.censused{
+    z-index:0;
+}
+.showcase-wrap.censused::after{
+    animation:none;
+    display: none;
+}
+@keyframes bg {
+    33% {
+        transform: translate(-30%, 30%);
+    }
+    66% {
+        transform: translate(-30%, -30%);
+    }
+    100% {
+        transform: translate(30%, -30%);
+    }
+}
+
+.showcase {
+    width: 100%;
+    max-width: 1024px;
+    height: 460px;
+    background-color: transparent;
+}
+
+.img-input {
+    display: none;
+}
+
+.btn-open,
+.btn-clear,
+.btn-census,
+.input-K {
+    border-radius: 50%;
+    background-repeat: no-repeat;
+    border: 1px solid #ccc;
+    transition: transform 2s ease;
+    will-change: transform;
+}
+
+.btn-open {
+    width: 30px;
+    height: 30px;
+    background-color: #c0ffc0;
+    background-image: url('../img/image.png');
+    background-position: 7px 7px;
+    background-size: 16px 16px;
+    transform: translate(280%, 100%);
+}
+.image-showcase.mounted .btn-open{
+    transform: translate(200%, -20%);
+}
+.btn-open:hover {
+    background-color: #a0ffa0;
+}
+
+.btn-clear {
+    width: 36px;
+    height: 36px;
+    background-color: #ffc0c0;
+    background-image: url('../img/delete.png');
+    background-position: 8px 8px;
+    background-size: 20px 20px;
+    transform: translate(90%, 100%);
+}
+
+.btn-clear:hover {
+    background-color: #ffa0a0;
+}
+
+.btn-census {
+    width: 45px;
+    height: 45px;
+    background-color: #ccf;
+    background-image: url('../img/census.png');
+    background-position: 10px 10px;
+    background-size: 25px 25px;
+    transform: translate(-60%, 90%);
+}
+.image-showcase.mounted .btn-census{
+    transform: translate(-180%, 120%);
+}
+.btn-census:hover {
+    background-color: #aae;
+}
+
+.input-K {
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    outline: none;
+    font-size: 17px;
+    color:#666;
+    background-color: #b3dffc;
+    transform: translate(-190%, 55%);
+}
+.image-showcase.mounted .input-K{
+    transform: translate(-80%, -10%);
+}
+.input-K:hover,.input-K:focus {
+    background-color: #a3cfec;
+}
+.input-K::-webkit-inner-spin-button{
+    -webkit-appearance: none;
+}
