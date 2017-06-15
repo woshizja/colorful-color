@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 Below you will find some information on how to perform common tasks.<br>
@@ -1621,3 +1622,7 @@ Please refer to [this section](#resolving-heroku-deployment-errors).
 ## Something Missing?
 
 If you have ideas for more “How To” recipes that should be on this page, [let us know](https://github.com/facebookincubator/create-react-app/issues) or [contribute some!](https://github.com/facebookincubator/create-react-app/edit/master/packages/react-scripts/template/README.md)
+=======
+# colorful-color
+census color form image, and score it by Artificial Neural Network.
+>>>>>>> 509139492c9e52c181fdb2b203fec7ae81b83899
