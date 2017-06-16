@@ -5,6 +5,7 @@
   flex-wrap: wrap;
 }
 .score-layer .wrap{
+  position: relative;
   display:flex;
   justify-content:center;
   align-items:center;
@@ -12,14 +13,15 @@
   width:100%;
   text-align: center;
   background-color: rgba(255,255,255,0.95);
-  will-change: transform;
+  /*will-change: auto;*/
 }
 .score-layer.show .wrap{
   background-color: #e0e0e0;
   position: fixed;
   z-index: 100;
   /*top: 0;*/
-  height: 100%;
+  width: 200px;
+  height: 200px;
   /*transform: translateY(100%);
   animation: show 600ms ease 1 forwards;*/
 }
