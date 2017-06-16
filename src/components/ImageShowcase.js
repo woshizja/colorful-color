@@ -123,22 +123,23 @@ class ImageShowcase extends Component {
         _h = 100*pixelRatio;
         this.isHorizontal = true;
       }
-      let img_w = img.width > (c_w-_w)/pixelRatio ? (c_w-_w)/pixelRatio : img.width;
-      let img_h = img.height > (c_h-_h)/pixelRatio ? (c_h-_h)/pixelRatio : img.height;
+      let img_w = img.width > (c_w-_w) ? (c_w-_w) : img.width;
+      let img_h = img.height > (c_h-_h) ? (c_h-_h) : img.height;
       let scale = (img_w / img.width < img_h / img.height) ? (img_w / img.width) : (img_h / img.height);
+      console.log("scale: ",scale)
       img_w = img.width * scale;
       img_h = img.height * scale;
       console.log(img_w,img_h)
       canvas.style.width = img_w + _w + "px";
       canvas.style.height = img_h + _h + "px";
-      canvas.width = img_w + _w;
-      canvas.height = img_h + _h;
-      ctx.drawImage(img, 0, 0, img.width, img.height, 0, 0, img_w, img_h);
+      canvas.width = (img_w*pixelRatio + _w);
+      canvas.height = (img_h*pixelRatio + _h);
+      ctx.drawImage(img, 0, 0, img.width, img.height, 0, 0, img_w*pixelRatio, img_h*pixelRatio);
     };
   }
 
   drawPalette(){
-    let pixelRatio = this.pixelRatio;
+    let pixelRatio = 1;//this.pixelRatio;
     let canvas = this.canvasShowcase;
     let c_w = canvas.width;
     let c_h = canvas.height;
@@ -146,7 +147,7 @@ class ImageShowcase extends Component {
     let K = this.state.K;
     let len = this.isHorizontal ? c_w : c_h;
     let interval = len*(K<10 ? 0.02 : 0.01);
-    interval *= pixelRatio;
+    // interval *= pixelRatio;
     let p = (len-(K-1)*interval) / K;
     let colors = this.state.clusterColors;
     if(colors.length===0){

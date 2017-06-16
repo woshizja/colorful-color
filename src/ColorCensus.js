@@ -124,11 +124,13 @@ class ColorCensus extends Component {
     };
     let w = c_w;
     let h = c_h;
+    console.log(w,h)
     let imageDate;
+     let pixelRatio = window.devicePixelRatio || 1;
     if(isHorizontal){
-      imageDate = ctx.getImageData(0, 0, w, h-100);
+      imageDate = ctx.getImageData(0, 0, w, h-100*pixelRatio);
     }else{
-      imageDate = ctx.getImageData(0, 0, w-100, h);
+      imageDate = ctx.getImageData(0, 0, w-100*pixelRatio, h);
     }
     if (!imageDate) {
       console.log("can not read image data, maybe because of cross-domain limitation.");
