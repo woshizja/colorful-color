@@ -15,12 +15,13 @@
   will-change: transform;
 }
 .score-layer.show .wrap{
-  position: fixed;
+  background-color: #e0e0e0;
+ /* position: fixed;
   z-index: 100;
   top: 0;
   height: 100%;
   transform: translateY(100%);
-  animation: show 600ms ease 1 forwards;
+  animation: show 600ms ease 1 forwards;*/
 }
 
 .score-layer.show .wrap .btn_tip_wrap{
@@ -70,7 +71,7 @@
   max-width: 450px;
   height:100vw;
   max-height:450px;
-  padding:5px;
+  padding:20px;
 }
 
 .circle .c0{
