@@ -503,9 +503,9 @@ class ColorCensus extends Component {
       showScoreLayer: val
     });
     if(val){
-      // document.body.classList.add("lock");
+      document.body.classList.add("lock");
     }else{
-      // document.body.classList.remove("lock");
+      document.body.classList.remove("lock");
     }
   }
 

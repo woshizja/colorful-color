@@ -17,9 +17,9 @@
 }
 .score-layer.show .wrap{
   background-color: #e0e0e0;
-  position: fixed;
+  position: absolute;
   z-index: 100;
-  /*top: 0;*/
+  top: 0;
   height: 100%;
   /*transform: translateY(100%);
   animation: show 600ms ease 1 forwards;*/
