@@ -16,11 +16,11 @@
 }
 .score-layer.show .wrap{
   background-color: #e0e0e0;
- /* position: fixed;
+  position: fixed;
   z-index: 100;
-  top: 0;
+  /*top: 0;*/
   height: 100%;
-  transform: translateY(100%);
+  /*transform: translateY(100%);
   animation: show 600ms ease 1 forwards;*/
 }
 
@@ -71,7 +71,6 @@
   max-width: 450px;
   height:100vw;
   max-height:450px;
-  padding:5px;
 }
 
 .circle .c0{
