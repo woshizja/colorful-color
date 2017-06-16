@@ -6,6 +6,7 @@ html,body {
 }
 body.lock {
     overflow: hidden;
+    touch-action: none;
 }
 
 canvas {
