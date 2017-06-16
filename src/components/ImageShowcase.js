@@ -20,9 +20,11 @@ class ImageShowcase extends Component {
   }
 
   componentDidMount(){
+    let pixelRatio = window.devicePixelRatio || 1;
+    this.pixelRatio = pixelRatio;
     let canvas = this.canvasShowcase;
-    canvas.width =  parseInt(getComputedStyle(canvas).width);
-    canvas.height = parseInt(getComputedStyle(canvas).height);
+    canvas.width =  pixelRatio * parseInt(getComputedStyle(canvas).width);
+    canvas.height = pixelRatio * parseInt(getComputedStyle(canvas).height);
     this.oriWidth = canvas.width;
     this.oriHeight = canvas.height;
     this.ctx = canvas.getContext('2d');
@@ -100,6 +102,7 @@ class ImageShowcase extends Component {
 
   drawToCanvas(imgData){
     this.handleClearClick();
+    let pixelRatio = this.pixelRatio;
     this.isLoaded = true;
     let canvas = this.canvasShowcase;
     let c_w = canvas.width;
@@ -109,21 +112,23 @@ class ImageShowcase extends Component {
     img.src = imgData;
     img.onload = () => {
       ctx.clearRect(0, 0, c_w, c_h);
+      console.log(c_w, c_h)
+      console.log(img.width, img.height)
       let _w = 0;
       let _h = 0;
       if(img.width<img.height){
-        _w = 100;
+        _w = 100*pixelRatio;
         this.isHorizontal = false;
       }else{
-        _h = 100;
+        _h = 100*pixelRatio;
         this.isHorizontal = true;
       }
-      let img_w = img.width > (c_w-_w) ? (c_w-_w) : img.width;
-      let img_h = img.height > (c_h-_h) ? (c_h-_h) : img.height;
+      let img_w = img.width > (c_w-_w)/pixelRatio ? (c_w-_w)/pixelRatio : img.width;
+      let img_h = img.height > (c_h-_h)/pixelRatio ? (c_h-_h)/pixelRatio : img.height;
       let scale = (img_w / img.width < img_h / img.height) ? (img_w / img.width) : (img_h / img.height);
       img_w = img.width * scale;
       img_h = img.height * scale;
-      // console.log(img_w,img_h)
+      console.log(img_w,img_h)
       canvas.style.width = img_w + _w + "px";
       canvas.style.height = img_h + _h + "px";
       canvas.width = img_w + _w;
@@ -133,6 +138,7 @@ class ImageShowcase extends Component {
   }
 
   drawPalette(){
+    let pixelRatio = this.pixelRatio;
     let canvas = this.canvasShowcase;
     let c_w = canvas.width;
     let c_h = canvas.height;
@@ -140,22 +146,23 @@ class ImageShowcase extends Component {
     let K = this.state.K;
     let len = this.isHorizontal ? c_w : c_h;
     let interval = len*(K<10 ? 0.02 : 0.01);
+    interval *= pixelRatio;
     let p = (len-(K-1)*interval) / K;
     let colors = this.state.clusterColors;
     if(colors.length===0){
       return;
     }
     if(this.isHorizontal){
-      ctx.clearRect(0, c_h - 90, c_w, 90);
+      ctx.clearRect(0, c_h - 90*pixelRatio, c_w, 90*pixelRatio);
     }else{
-      ctx.clearRect(c_w - 90, 0, 90, c_h);
+      ctx.clearRect(c_w - 90*pixelRatio, 0, 90*pixelRatio, c_h);
     }
     for(let i=0;i<K;i++){
       ctx.fillStyle = colors[i];
       if(this.isHorizontal){
-        ctx.fillRect((p + interval)*i ,c_h - 90,p,90);
+        ctx.fillRect((p + interval)*i ,c_h - 90*pixelRatio,p,90*pixelRatio);
       }else{
-        ctx.fillRect(c_w - 90, (p + interval)*i, 90, p);
+        ctx.fillRect(c_w - 90*pixelRatio, (p + interval)*i, 90*pixelRatio, p);
       }
     }
   }
