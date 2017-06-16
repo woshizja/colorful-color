@@ -26,8 +26,8 @@ class CanvasBubbleChart extends Component {
 		this.oriHeight = canvas.height;
 		this.ctx = canvas.getContext('2d');
 		this.circle_r = Math.min(
-			canvas.width / 2 - 10,
-			canvas.height / 2 - 10
+			canvas.width / 2 - 30,
+			canvas.height / 2 - 30
 		);
 		this.iterations = 2;
 		this.time = 2000;
