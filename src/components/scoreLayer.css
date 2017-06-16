@@ -1,8 +1,8 @@
 .score-layer{
-  display: flex;
+  /*display: flex;
   justify-content: center;
   align-items: center;
-  flex-wrap: wrap;
+  flex-wrap: wrap;*/
 }
 .score-layer .wrap{
   position: relative;
@@ -20,8 +20,7 @@
   position: fixed;
   z-index: 100;
   /*top: 0;*/
-  width: 200px;
-  height: 200px;
+  height: 100%;
   /*transform: translateY(100%);
   animation: show 600ms ease 1 forwards;*/
 }
