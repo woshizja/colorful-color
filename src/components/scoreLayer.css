@@ -1,119 +1,125 @@
-.score-layer{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-}
-.score-layer .wrap{
-  position: relative;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  flex-wrap:wrap;
-  width:100%;
-  text-align: center;
-  background-color: rgba(255,255,255,0.95);
-  will-change: auto;
-}
-.score-layer.show .wrap{
-  background-color: #e0e0e0;
-  position: fixed;
-  overflow: auto;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 100001;
-  height: 100%;
-  /*transform: translateY(100%);
-  animation: show 600ms ease 1 forwards;*/
+.score-layer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
 }
 
-.score-layer.show .wrap .btn_tip_wrap{
-  display: block;
+.score-layer .wrap {
+    display: flex;
+    width: 100%;
+    background-color: rgba(255, 255, 255, .95);
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    will-change: auto;
+}
+
+.score-layer.show .wrap {
+    position: fixed;
+    z-index: 100001;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    overflow: auto;
+    overflow: hidden;
+    transform: translateY(100%);
+    animation: show 600ms ease 1 forwards;
+    touch-action: none;
+}
+
+.score-layer.show .wrap .btn_tip_wrap {
+    display: block;
 }
 
 @keyframes show {
-  100%{
-    transform: translateY(0%);
-  }
+    100% {
+        transform: translateY(0%);
+    }
 }
 
-.wrap .btn_tip_wrap{
-  display: none;
-  width:100%;
-  text-align:center;
-}
-.wrap .btn_tip_wrap.scored .btn{
-  border:1px solid #168617;
-  color:#168617;
-}
-.wrap .btn_tip_wrap .btn{
-  width:100px;
-  height:30px;
-  margin-bottom: 15px;
-  outline:none;
-  border:1px solid #666;
-  border-radius:4px;
-  color:#666;
-  background-color:#fff;
-  font-size: 13px;
-}
-.wrap .btn_tip_wrap .tip{
-  box-sizing: border-box;
-  width:100%;
-  color:#aaa;
-  font-size:12px;
-  font-style: italic;
-  text-align: center;
-}
-.wrap .btn_tip_wrap .tip p{
-  line-height: 140%;
-  margin:3px 0;
-}
-.circle{
-  width:100vw;
-  max-width: 450px;
-  height:100vw;
-  max-height:450px;
+.wrap .btn_tip_wrap {
+    display: none;
+    width: 100%;
+    text-align: center;
 }
 
-.circle .c0{
-  stroke:none;
-  stroke-width:0;
-  fill: url("#basic0");
+.wrap .btn_tip_wrap.scored .btn {
+    color: #168617;
+    border: 1px solid #168617;
 }
 
-.circle .c1{
-  stroke:#none;
-  stroke-width:0;
-  fill:url("#basic1");
-  stroke-linecap:round;
+.wrap .btn_tip_wrap .btn {
+    width: 100px;
+    height: 30px;
+    margin-bottom: 15px;
+    color: #666;
+    border: 1px solid #666;
+    border-radius: 4px;
+    outline: none;
+    background-color: #fff;
+    font-size: 13px;
 }
 
-.circle .c2{
-  stroke:#none;
-  stroke-width:0;
-  fill:url("#basic2");
-  stroke-linecap:round;
-  transform:rotate(20deg);
-  transform-origin:50% 50%;
+.wrap .btn_tip_wrap .tip {
+    box-sizing: border-box;
+    width: 100%;
+    color: #aaa;
+    font-size: 12px;
+    font-style: italic;
+    text-align: center;
 }
 
-.circle .c3{
-  stroke:none;
-  stroke-width:0;
-  fill:url("#basic3");
-  stroke-linecap:round;
-  transform:rotate(40deg);
-  transform-origin:50% 50%;
+.wrap .btn_tip_wrap .tip p {
+    line-height: 140%;
+    margin: 3px 0;
 }
 
-.circle .scores{
-  fill:#666;
-  stroke:none;
-  stroke-width:0;
-  font-family:"Times New Roman",Georgia,Serif;
-  font-size:10px;
-  font-style:italic;
+.circle {
+    width: 100vw;
+    max-width: 450px;
+    height: 100vw;
+    max-height: 450px;
+}
+
+.circle .c0 {
+    stroke: none;
+    stroke-width: 0;
+    fill: url('#basic0');
+}
+
+.circle .c1 {
+    stroke: #none;
+    stroke-width: 0;
+    fill: url('#basic1');
+    stroke-linecap: round;
+}
+
+.circle .c2 {
+    transform: rotate(20deg);
+    transform-origin: 50% 50%;
+    stroke: #none;
+    stroke-width: 0;
+    fill: url('#basic2');
+    stroke-linecap: round;
+}
+
+.circle .c3 {
+    transform: rotate(40deg);
+    transform-origin: 50% 50%;
+    stroke: none;
+    stroke-width: 0;
+    fill: url('#basic3');
+    stroke-linecap: round;
+}
+
+.circle .scores {
+    font-family: 'Times New Roman', Georgia, Serif;
+    font-size: 10px;
+    font-style: italic;
+    fill: #666;
+    stroke: none;
+    stroke-width: 0;
 }
