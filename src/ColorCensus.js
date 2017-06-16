@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import brain from 'brain';
 import {rgbToHsl, hslToRgb, rgbToHex} from './util/utils.js';
-import {trainData1,network1,network2} from './util/trainData.js';
+import {network1,network2} from './util/trainData.js';
 import ImageShowcase from './components/ImageShowcase.js';
 import ColorBar from './components/ColorBar.js';
 import ColorCard from './components/ColorCard.js';
@@ -25,12 +25,19 @@ class ColorCensus extends Component {
         kmeansIteration:0,
         kmeansTime:0,
         top5Count: 0
+      },
+      loopColors:{
+        bc0:["rgb(222,244,255)", "rgb(183,189,255)"],
+        bc1:["rgba(27,72,177,0.3)", "rgba(27,72,177,0.7)"],
+        bc2:["rgba(74,192,223,0.3)", "rgba(74,192,223,0.7)"],
+        bc3:["rgba(140,114,192,0.3)", "rgba(140,114,192,0.7)"]
       }
     };
     this.infos = [];
     this.resetApp = this.resetApp.bind(this);
     this.censusColors = this.censusColors.bind(this);
     this.setScoreLayer = this.setScoreLayer.bind(this);
+    this.updateLoopColors = this.updateLoopColors.bind(this);
   }
 
   componentDidMount(){
@@ -67,6 +74,16 @@ class ColorCensus extends Component {
         top5Count:0
       }
     });
+    if(this.state.loopColors.bc0[0]!=="rgb(222,244,255)"&&this.state.loopColors.bc3[1]!=="rgba(140,114,192,0.7)"){
+      this.setState ({
+        loopColors:{
+          bc0:["rgb(222,244,255)", "rgb(183,189,255)"],
+          bc1:["rgba(27,72,177,0.3)", "rgba(27,72,177,0.7)"],
+          bc2:["rgba(74,192,223,0.3)", "rgba(74,192,223,0.7)"],
+          bc3:["rgba(140,114,192,0.3)", "rgba(140,114,192,0.7)"]
+        }
+      });
+    }
   }
 
   chooseSeedColors(colors, num){
@@ -124,7 +141,6 @@ class ColorCensus extends Component {
     };
     let w = c_w;
     let h = c_h;
-    console.log(w,h)
     let imageDate;
      let pixelRatio = window.devicePixelRatio || 1;
     if(isHorizontal){
@@ -138,10 +154,9 @@ class ColorCensus extends Component {
     }
     let rows = imageDate.height;
     let cols = imageDate.width;
-    console.log(rows,cols)
     let keys = [];
     let colors_info = [];
-    let r_key, g_key, b_key,h_key, s_key, l_key, r, g, b;
+    let h_key, s_key, l_key, r, g, b;
     let pixel_count = 0;
     let pixel_step = (rows * cols < 600 * 600) ? 1 : 2;
     console.log("pixel step",pixel_step)
@@ -209,7 +224,6 @@ class ColorCensus extends Component {
     });
     console.log("after filter: ",colors_info.length)
     let main_color = [colors_info[0], colors_info[1], colors_info[2]];
-
     // k-mean clustering
     let init_seed_1 = this.chooseSeedColors(colors_info, K);
     let cluster_res = this.kMC(colors_info, init_seed_1, 100);
@@ -233,7 +247,7 @@ class ColorCensus extends Component {
       s: average_color[1],
       l: average_color[2],
     };
-    let main_color_a = "rgba(" +colors_info[0].r +"," +colors_info[0].g +"," +colors_info[0].b + ",0.68)";
+    let main_color_a = "rgba(" +colors_info[0].r +"," +colors_info[0].g +"," +colors_info[0].b + ",0.62)";
 
     processInfo.kmeansTime = +new Date() - start;
     processInfo.kmeansIteration = cluster_res[1];
@@ -247,10 +261,31 @@ class ColorCensus extends Component {
       averageColor: average_color,
       processInfo: processInfo
     });
+    this.updateLoopColors(main_color, cluster_res[0]);
     if (callBack instanceof Function) {
       callBack(main_color_a, cluster_res_1);
     }
+  }
 
+  updateLoopColors(main_color, cluster_res){
+    let scale = 1.1;
+    let mc_r = main_color[0].r*scale<255 ? Math.floor(main_color[0].r*scale) : 255;
+    let mc_g = main_color[0].g*scale<255 ? Math.floor(main_color[0].g*scale) : 255;
+    let mc_b = main_color[0].b*scale<255 ? Math.floor(main_color[0].b*scale) : 255;
+    let mc_r2 = mc_r*scale*scale<255 ? Math.floor(mc_r*scale*scale) : 255;
+    let mc_g2 = mc_g*scale*scale<255 ? Math.floor(mc_g*scale*scale) : 255;
+    let mc_b2 = mc_b*scale*scale<255 ? Math.floor(mc_b*scale*scale) : 255;
+    let step = Math.floor(cluster_res.length/3);
+    let bc1 = hslToRgb(cluster_res[0].h, cluster_res[0].s, cluster_res[0].l);
+    let bc2 = hslToRgb(cluster_res[step].h, cluster_res[step].s, cluster_res[step].l);
+    let bc3 = hslToRgb(cluster_res[step*2].h, cluster_res[step*2].s, cluster_res[step*2].l);
+    let loopColors = {
+      bc0:["rgb(" +mc_r +"," +mc_g +"," +mc_b + ")","rgb(" + mc_r2 +"," + mc_g2 +"," +mc_b2+ ")"],
+      bc1:["rgba(" +bc1[0]+"," +bc1[1] +"," +bc1[2] + ",0.4)","rgba(" +bc1[0] +"," +bc1[1] +"," +bc1[2] + ",0.7)"],
+      bc2:["rgba(" +bc2[0]+"," +bc2[1] +"," +bc2[2] + ",0.4)","rgba(" +bc2[0] +"," +bc2[1] +"," +bc2[2] + ",0.7)"],
+      bc3:["rgba(" +bc3[0]+"," +bc3[1] +"," +bc3[2] + ",0.4)","rgba(" +bc3[0] +"," +bc3[1] +"," +bc3[2] + ",0.7)"]
+    };
+    this.setState({loopColors:loopColors});
   }
 
   kMC(colors, seeds, max_step) {
@@ -493,10 +528,10 @@ class ColorCensus extends Component {
     let score2 = 100*t2.first/res_count2 + 85*t2.second/res_count2 + 75*t2.third/res_count2 + 65*t2.fourth/res_count2;
     let score_final = score*0.2 + score2*0.8;
     console.log("score: ",score_final)
-    setTimeout(()=>{
-      this.setState({score:score_final});
-    },650);
-    // this.setState({score:score_final});
+    // setTimeout(()=>{
+    //   this.setState({score:score_final});
+    // },650);
+    this.setState({score:score_final});
     return info;
   }
 
@@ -517,7 +552,7 @@ class ColorCensus extends Component {
     return (
       <div className="App">
         <ImageShowcase setScoreLayer={this.setScoreLayer} censusColors={this.censusColors} resetApp={this.resetApp}></ImageShowcase>
-        <ScoreLayer score={this.state.score} setScoreLayer={this.setScoreLayer}  showScoreLayer = {this.state.showScoreLayer}></ScoreLayer>
+        <ScoreLayer loopColors={this.state.loopColors} score={this.state.score} setScoreLayer={this.setScoreLayer}  showScoreLayer = {this.state.showScoreLayer}></ScoreLayer>
         <ColorBar label="main color" {...mcProps}></ColorBar>
         <ColorBar label="average color" {...acProps}></ColorBar>
         <ColorCard colors={this.state.clusterColors}></ColorCard>

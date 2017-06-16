@@ -32,25 +32,21 @@ class ScoreLayer extends Component {
 				<div className="wrap">
 				  <svg className="circle" viewBox="0,0,120,120">
 				    <defs>
-				      <linearGradient id="basic0" x1="0" y1="70%" x2="100%" y2="30%">
-				        <stop offset="0%" style={{stopColor:"rgb(222,244,255)",stopOpacity:1}}>
-				          <animate attributeName="stopColor" values="rgb(222,244,255);rgb(255,255,255);rgb(222,244,255)" dur="11s" repeatCount="indefinite" />
-				        </stop>
-				        <stop offset="100%" style={{stopColor:"rgb(183,189,255)",stopOpacity:1}}>
-				          <animate attributeName="stopColor" values="rgb(183,189,255);rgb(240,240,245);rgb(183,189,255)" dur="11s" repeatCount="indefinite" />
-				        </stop>
+				      <linearGradient key="basic0" id="basic0" x1="0" y1="70%" x2="100%" y2="30%">
+				        <stop offset="0%" style={{stopColor:this.props.loopColors.bc0[0],stopOpacity:1}}></stop>
+				        <stop offset="100%" style={{stopColor:this.props.loopColors.bc0[1],stopOpacity:1}}></stop>
 				      </linearGradient>
-				      <linearGradient id="basic1" x1="0" y1="0%" x2="100%" y2="100%">
-				        <stop offset="0%" style={{stopColor:"rgba(27,72,177,0.3)",stopOpacity:1}} />
-				        <stop offset="100%" style={{stopColor:"rgba(27,72,177,0.7)",stopOpacity:1}}/>
+				      <linearGradient key="basic1" id="basic1" x1="0" y1="0%" x2="100%" y2="100%">
+				        <stop offset="0%" style={{stopColor:this.props.loopColors.bc1[0],stopOpacity:1}} />
+				        <stop offset="100%" style={{stopColor:this.props.loopColors.bc1[1],stopOpacity:1}}/>
 				      </linearGradient>
-				      <linearGradient id="basic2" x1="0" y1="0%" x2="100%" y2="100%">
-				        <stop offset="0%" style={{stopColor:"rgba(74,192,223,0.3)",stopOpacity:1}} />
-				        <stop offset="100%" style={{stopColor:"rgba(74,192,223,0.7)",stopOpacity:1}} />
+				      <linearGradient key="basic2" id="basic2" x1="0" y1="0%" x2="100%" y2="100%">
+				        <stop offset="0%" style={{stopColor:this.props.loopColors.bc2[0],stopOpacity:1}} />
+				        <stop offset="100%" style={{stopColor:this.props.loopColors.bc2[1],stopOpacity:1}} />
 				      </linearGradient>
-				      <linearGradient id="basic3" x1="0" y1="0%" x2="100%" y2="100%">
-				        <stop offset="0%" style={{stopColor:"rgba(140,114,192,0.3)",stopOpacity:0.9}} />
-				        <stop offset="100%" style={{stopColor:"rgba(140,114,192,0.7)",stopOpacity:0.9}} />
+				      <linearGradient key="basic3" id="basic3" x1="0" y1="0%" x2="100%" y2="100%">
+				        <stop offset="0%" style={{stopColor:this.props.loopColors.bc3[0],stopOpacity:0.9}} />
+				        <stop offset="100%" style={{stopColor:this.props.loopColors.bc3[1],stopOpacity:0.9}} />
 				      </linearGradient>
 				    </defs>
 				    <g>

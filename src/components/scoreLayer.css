@@ -119,7 +119,8 @@
     font-family: 'Times New Roman', Georgia, Serif;
     font-size: 10px;
     font-style: italic;
-    fill: #666;
+    fill: #eee;
     stroke: none;
     stroke-width: 0;
+    text-shadow: 0 1px 2px #000;
 }

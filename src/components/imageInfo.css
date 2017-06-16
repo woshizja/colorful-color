@@ -17,8 +17,14 @@
     margin: 2px 0;
     color: #333;
     font-size: 15px;
+    transition: all 300ms ease;
 }
-
+.info-wrap .info-bar:hover{
+    background-color: #f0f0f0;
+}
+.info-wrap .info-bar:hover .info{
+    color: #e33;
+}
 .info-wrap .info-bar::after {
     position: absolute;
     top: 0;

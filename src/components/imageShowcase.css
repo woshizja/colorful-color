@@ -1,25 +1,25 @@
 .head {
-    height: 80px;
-    line-height: 80px;
-    margin: 0;
-    padding: 0 15px;
-    border-bottom: 1px solid #999;
-    text-align: left;
-    color: #666;
-    font-size: 24px;
-    user-select: none;
     position: relative;
     z-index: -1;
+    height: 80px;
+    line-height: 80px;
+    padding: 0 15px;
+    margin: 0;
+    color: #666;
+    border-bottom: 1px solid #999;
+    font-size: 22px;
+    user-select: none;
+    text-align: left;
 }
 
 .head:before {
-    content: '';
-    width: 7px;
-    height: 70%;
-    background: #30983F;
     position: absolute;
     top: 15%;
     left: 0;
+    width: 7px;
+    height: 70%;
+    background: #30983f;
+    content: '';
 }
 
 .image-showcase {
@@ -30,33 +30,36 @@
 .showcase-wrap {
     position: relative;
     z-index: -10;
-    font-size: 0;
-    background-color: #eef;
     overflow: hidden;
+    background-color: #eef;
+    font-size: 0;
 }
 
 .showcase-wrap::after {
-    content: '';
     position: absolute;
     z-index: -5;
     top: -100%;
-    left: -100%;
-    bottom: -100%;
     right: -100%;
+    bottom: -100%;
+    left: -100%;
     background: -webkit-linear-gradient(45deg, #fcc, #cfc, #ccf);
-    background-size: 100% 100%;
     background-position: 0 0;
-    animation: bg 8s infinite linear alternate;
+    background-size: 100% 100%;
+    content: '';
     transform: translate(30%, 30%);
+    animation: bg 8s infinite linear alternate;
     will-change: transform;
 }
-.showcase-wrap.censused{
-    z-index:0;
+
+.showcase-wrap.censused {
+    z-index: 0;
 }
-.showcase-wrap.censused::after{
-    animation:none;
+
+.showcase-wrap.censused::after {
     display: none;
+    animation: none;
 }
+
 @keyframes bg {
     33% {
         transform: translate(-30%, 30%);
@@ -84,9 +87,10 @@
 .btn-clear,
 .btn-census,
 .input-K {
+    border: none;
     border-radius: 50%;
+    box-shadow: 2px 2px 4px rgba(0,0,0,0.3);
     background-repeat: no-repeat;
-    border: 1px solid #ccc;
     transition: transform 2s ease;
     will-change: transform;
 }
@@ -100,9 +104,11 @@
     background-size: 16px 16px;
     transform: translate(280%, 100%);
 }
-.image-showcase.mounted .btn-open{
+
+.image-showcase.mounted .btn-open {
     transform: translate(200%, -20%);
 }
+
 .btn-open:hover {
     background-color: #a0ffa0;
 }
@@ -130,9 +136,11 @@
     background-size: 25px 25px;
     transform: translate(-60%, 90%);
 }
-.image-showcase.mounted .btn-census{
+
+.image-showcase.mounted .btn-census {
     transform: translate(-180%, 120%);
 }
+
 .btn-census:hover {
     background-color: #aae;
 }
@@ -140,19 +148,23 @@
 .input-K {
     width: 40px;
     height: 40px;
-    text-align: center;
+    color: #666;
     outline: none;
-    font-size: 17px;
-    color:#666;
     background-color: #b3dffc;
+    font-size: 17px;
     transform: translate(-190%, 55%);
+    text-align: center;
 }
-.image-showcase.mounted .input-K{
+
+.image-showcase.mounted .input-K {
     transform: translate(-80%, -10%);
 }
-.input-K:hover,.input-K:focus {
+
+.input-K:hover,
+.input-K:focus {
     background-color: #a3cfec;
 }
-.input-K::-webkit-inner-spin-button{
+
+.input-K::-webkit-inner-spin-button {
     -webkit-appearance: none;
 }

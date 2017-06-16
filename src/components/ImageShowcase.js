@@ -14,6 +14,7 @@ class ImageShowcase extends Component {
     this.handleOpenClick = this.handleOpenClick.bind(this);
     this.handleClearClick = this.handleClearClick.bind(this);
     this.handleKInput = this.handleKInput.bind(this);
+    this.handleKBlur = this.handleKBlur.bind(this);
     this.handleCensusClick = this.handleCensusClick.bind(this);
     this.readFile = this.readFile.bind(this);
     this.drawColor = this.drawColor.bind(this);
@@ -50,6 +51,10 @@ class ImageShowcase extends Component {
   }
 
   handleKInput(e){
+    this.setState({K: e.target.value});
+  }
+
+  handleKBlur(e){
     let val = e.target.value;
     val = val<3?3:(val>20?20:val);
     this.setState({K: val});
@@ -60,8 +65,10 @@ class ImageShowcase extends Component {
       return;
     }
     let canvas = this.canvasShowcase;
-    this.props.censusColors(this.ctx, this.state.K, canvas.width, canvas.height, this.isHorizontal, this.drawColor);
     this.props.setScoreLayer(true);
+    setTimeout(()=>{
+      this.props.censusColors(this.ctx, this.state.K, canvas.width, canvas.height, this.isHorizontal, this.drawColor);
+    },600);
   }
 
   drawColor(main_color, cluster_colors){
@@ -89,11 +96,12 @@ class ImageShowcase extends Component {
   }
 
   resetShowcase(){
+     let pixelRatio = this.pixelRatio;
      let canvas = this.canvasShowcase;
      canvas.width = this.oriWidth;
-     canvas.style.width = this.oriWidth + "px";
+     canvas.style.width = this.oriWidth/pixelRatio + "px";
      canvas.height = this.oriHeight;
-     canvas.style.height = this.oriHeight + "px";
+     canvas.style.height = this.oriHeight/pixelRatio + "px";
      this.setState({
       bgC: "",
       clusterColors: []
@@ -112,8 +120,6 @@ class ImageShowcase extends Component {
     img.src = imgData;
     img.onload = () => {
       ctx.clearRect(0, 0, c_w, c_h);
-      console.log(c_w, c_h)
-      console.log(img.width, img.height)
       let _w = 0;
       let _h = 0;
       if(img.width<img.height){
@@ -126,7 +132,6 @@ class ImageShowcase extends Component {
       let img_w = img.width > (c_w-_w)/pixelRatio ? (c_w-_w)/pixelRatio : img.width;
       let img_h = img.height > (c_h-_h)/pixelRatio ? (c_h-_h)/pixelRatio : img.height;
       let scale = (img_w / img.width < img_h / img.height) ? (img_w / img.width) : (img_h / img.height);
-      console.log("scale: ",scale)
       img_w = img.width * scale;
       img_h = img.height * scale;
       console.log(img_w,img_h)
@@ -139,7 +144,7 @@ class ImageShowcase extends Component {
   }
 
   drawPalette(){
-    let pixelRatio = 1;//this.pixelRatio;
+    let pixelRatio = this.pixelRatio;
     let canvas = this.canvasShowcase;
     let c_w = canvas.width;
     let c_h = canvas.height;
@@ -175,7 +180,7 @@ class ImageShowcase extends Component {
     showcaseWrapClass += " showcase-wrap";
     return (
       <div className={showcaseClass}>
-        <div className="head"><b>Color Census</b></div>
+        <div className="head"><b>Colorful Color</b></div>
         <div className={showcaseWrapClass} style={{background:this.state.bgC}}>
           <canvas className="showcase" ref={(canvas) => { this.canvasShowcase = canvas; }}></canvas>
         </div>
@@ -183,7 +188,7 @@ class ImageShowcase extends Component {
         <button className="btn-open" onClick={this.handleOpenClick} title="open image"></button>
         <button className="btn-clear" onClick={this.handleClearClick} title="clear image"></button>
         <button className="btn-census" onClick={this.handleCensusClick} title="census color"></button>
-        <input type="number"  className="input-K"  value={this.state.K} onChange={this.handleKInput} title="K means" />
+        <input type="number"  className="input-K"  value={this.state.K} onBlur={this.handleKBlur} onChange={this.handleKInput} title="K means" />
       </div>
     );
   }
