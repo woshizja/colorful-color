@@ -491,10 +491,10 @@ class ColorCensus extends Component {
     let score2 = 100*t2.first/res_count2 + 85*t2.second/res_count2 + 75*t2.third/res_count2 + 65*t2.fourth/res_count2;
     let score_final = score*0.2 + score2*0.8;
     console.log("score: ",score_final)
-    // setTimeout(()=>{
-    //   this.setState({score:score_final});
-    // },650);
-    this.setState({score:score_final});
+    setTimeout(()=>{
+      this.setState({score:score_final});
+    },650);
+    // this.setState({score:score_final});
     return info;
   }
 
