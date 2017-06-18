@@ -360,7 +360,13 @@ class ColorCensus extends Component {
     }
     console.log("KMC iteration " + iteration_count);
     seeds.sort(function(pre, next) {
-      return pre.h - next.h;
+      let pre_rgb = hslToRgb(pre.h, pre.s, pre.l);
+      pre_rgb = pre_rgb[0]+pre_rgb[1]+pre_rgb[2];
+      // let next_h = next.h;
+      // next_h = next_h < 30 ? (next_h+330) : next_h;
+      let next_rgb = hslToRgb(next.h,next.s,next.l);
+      next_rgb = next_rgb[0]+next_rgb[1]+next_rgb[2];
+      return next_rgb - pre_rgb;
     });
     return [seeds,iteration_count];
   }
