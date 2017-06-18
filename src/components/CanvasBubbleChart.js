@@ -9,11 +9,13 @@ class CanvasBubbleChart extends Component {
 		super(props);
 		this.state = {
 			selectColor: '',
-			clickInCircle: false
+			clickInCircle: false,
+      			showSave:false
 		};
 		this.bubbles = [];
 		this.drawBubbles = this.drawBubbles.bind(this);
 		this.handleCanvasClick = this.handleCanvasClick.bind(this);
+    		this.handleSaveClick = this.handleSaveClick.bind(this);
 	}
 
 	componentDidMount() {
@@ -26,8 +28,8 @@ class CanvasBubbleChart extends Component {
 		this.oriHeight = canvas.height;
 		this.ctx = canvas.getContext('2d');
 		this.circle_r = Math.min(
-			canvas.width / 2 - 30,
-			canvas.height / 2 - 30
+			canvas.width / 2 - 15*pixelRatio,
+			canvas.height / 2 - 15*pixelRatio
 		);
 		this.iterations = 2;
 		this.time = 2000;
@@ -40,6 +42,9 @@ class CanvasBubbleChart extends Component {
 			return;
 		}
 		if (!this.state.clickInCircle) {
+			if(!this.state.showSave){
+				return;
+			}
 			this.renderBubble(this.props.colors);
 		}
 	}
@@ -288,10 +293,31 @@ class CanvasBubbleChart extends Component {
 				selectColor: '',
 				clickInCircle: clickInCircle
 			});
+			this.setState({
+			      showSave: !this.state.showSave
+			});
+		    	if(this.timer){
+		        	clearTimeout(this.timer);
+		    	}
+		    	this.timer = setTimeout(()=>{
+		      		this.setState({
+		        		showSave: false
+		      		});
+		   	},2300);
 		}
 	}
 
+	handleSaveClick(){
+	    let canvas = this.bubbleChart;
+	    let img = new Image();
+    	    img.src = canvas.toDataURL("image/png");
+	    let w = window.open('about:blank', 'image from canvas');
+	    w.document.body.appendChild(img);
+	}
+
 	render() {
+		let saveWrapClass = this.state.showSave ? 'show' : '';
+    		saveWrapClass += " save-wrap";
 		return (
 			<div className="bubble-chart">
 				<div className="title">
@@ -301,6 +327,9 @@ class CanvasBubbleChart extends Component {
 				<div className="select-wrap">
 					<div className="color" style={{background: this.state.selectColor}}>{this.state.selectColor}</div>
 				</div>
+				<div className={saveWrapClass}>
+			        <span className="save" onClick={this.handleSaveClick}>SAVE</span>
+			      </div>
 			</div>
 		);
 	}

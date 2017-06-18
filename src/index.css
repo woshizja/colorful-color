@@ -68,14 +68,41 @@ button:hover {
 }
 
 .foot-wrap {
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-wrap: wrap;
     line-height: 80px;
     background-color: #333;
     color: #eee;
     font-style: italic;
     font-size: 12px;
+}
+
+.foot-wrap .qr-wrap{
+    position: absolute;
+    left:0;
+    top:-200px;
+    width: 100%;
+    height:200px;
+    background-color: #fff;
+    transform: scale(1, 0);
+    transform-origin: 50% 100%;
+    transition: all 300ms ease;
+    text-align: center;
+}
+
+.foot-wrap .qr-wrap .qr-img{
+    height: 100%;
+}
+
+.foot-wrap.show-qr .qr-wrap{
+    transform: scale(1, 1);
+}
+
+.foot-wrap a:hover {
+    background-color: #2c2c2c;
 }
 
 .foot-wrap .author {
@@ -115,4 +142,37 @@ button:hover {
     background-image: url('./img/github.png');
     background-position: 5px 5px;
     background-size: 20px 20px;
+}
+
+.foot-wrap .logo.scan {
+    background-image: url('./img/scan.png');
+    background-position: 5px 5px;
+    background-size: 20px 20px;
+}
+
+.save-wrap .save {
+    display: inline-block;
+    line-height: 30px;
+    padding: 0 10px;
+    opacity: 0;
+    color: #444;
+    border: 1px solid #999;
+    border-radius: 4px;
+    border-top-right-radius: 0;
+    border-top-left-radius: 0;
+    font-size: 12px;
+    font-weight: 600;
+    transition: all 500ms ease;
+    transform: translateX(100%);
+    cursor: pointer;
+}
+
+.save-wrap.show .save {
+    opacity: 1;
+    transform: translateX(0%);
+}
+
+.save-wrap .save:hover {
+    color: #fff;
+    background-color: #444;
 }

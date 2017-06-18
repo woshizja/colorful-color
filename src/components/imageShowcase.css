@@ -23,7 +23,7 @@
 }
 
 .image-showcase {
-    margin-bottom: 50px;
+    margin-bottom: 40px;
     text-align: center;
 }
 
@@ -89,8 +89,8 @@
 .input-K {
     border: none;
     border-radius: 50%;
-    box-shadow: 2px 2px 4px rgba(0,0,0,0.3);
     background-repeat: no-repeat;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, .3);
     transition: transform 2s ease;
     will-change: transform;
 }
@@ -167,4 +167,15 @@
 
 .input-K::-webkit-inner-spin-button {
     -webkit-appearance: none;
+}
+
+
+.image-showcase .save-wrap {
+    z-index: -1;
+    float: right;
+    overflow: hidden;
+    width: 100%;
+    line-height: 30px;
+    margin-top: -65px;
+    text-align: right;
 }

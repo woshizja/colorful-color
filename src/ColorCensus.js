@@ -8,6 +8,7 @@ import ColorCard from './components/ColorCard.js';
 import CanvasBubbleChart from './components/CanvasBubbleChart.js';
 import ScoreLayer from './components/ScoreLayer.js';
 import ImageInfo from './components/ImageInfo.js';
+import qr from './img/qr.png';
 
 class ColorCensus extends Component {
   constructor(props) {
@@ -24,7 +25,8 @@ class ColorCensus extends Component {
         censusTime: 0,
         kmeansIteration:0,
         kmeansTime:0,
-        top5Count: 0
+        top5Count: 0,
+        showQr:false
       },
       loopColors:{
         bc0:["rgb(222,244,255)", "rgb(183,189,255)"],
@@ -38,6 +40,7 @@ class ColorCensus extends Component {
     this.censusColors = this.censusColors.bind(this);
     this.setScoreLayer = this.setScoreLayer.bind(this);
     this.updateLoopColors = this.updateLoopColors.bind(this);
+    this.handleShowQrClick = this.handleShowQrClick.bind(this);
   }
 
   componentDidMount(){
@@ -71,7 +74,8 @@ class ColorCensus extends Component {
         censusTime: 0,
         kmeansIteration:0,
         kmeansTime:0,
-        top5Count:0
+        top5Count:0,
+        showQr:false
       }
     });
     if(this.state.loopColors.bc0[0]!=="rgb(222,244,255)"&&this.state.loopColors.bc3[1]!=="rgba(140,114,192,0.7)"){
@@ -546,9 +550,15 @@ class ColorCensus extends Component {
     }
   }
 
+  handleShowQrClick(){
+    this.setState({showQr: !this.state.showQr});
+  }
+
   render() {
     let mcProps =  this.colorToProps(this.state.mainColor);
     let acProps = this.colorToProps(this.state.averageColor);
+    let footWrapClass = this.state.showQr ? 'show-qr' : '';
+    footWrapClass += " foot-wrap";
     return (
       <div className="App">
         <ImageShowcase setScoreLayer={this.setScoreLayer} censusColors={this.censusColors} resetApp={this.resetApp}></ImageShowcase>
@@ -558,11 +568,15 @@ class ColorCensus extends Component {
         <ColorCard colors={this.state.clusterColors}></ColorCard>
         <ImageInfo processInfo={this.state.processInfo}></ImageInfo>
         <CanvasBubbleChart colors={this.state.colorsInfo}></CanvasBubbleChart>
-        <div className="foot-wrap">
+        <div className={footWrapClass}>
+          <div className="qr-wrap">
+            <img className="qr-img" src={qr}/>
+          </div>
           <div className="author">by junz91@foxmail.com</div>
           <a target="_Blank" href="http://weibo.com/u/3234865203"><span className="logo weibo"></span></a>
           <a target="_Blank" href="https://codepen.io/zhaojun/post/cc"><span className="logo codepen"></span></a>
           <a target="_Blank" href="https://github.com/woshizja"><span className="logo github"></span></a>
+          <a href="##" onClick={this.handleShowQrClick}><span className="logo scan"></span></a>
         </div>
       </div>
     );

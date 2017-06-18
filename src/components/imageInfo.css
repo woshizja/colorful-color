@@ -15,8 +15,8 @@
     padding-left: 10px;
     margin: 0 5%;
     margin: 2px 0;
-    color: #333;
-    font-size: 15px;
+    color: #666;
+    font-size: 14px;
     transition: all 300ms ease;
 }
 .info-wrap .info-bar:hover{
@@ -49,7 +49,7 @@
 }
 
 .info-wrap .info-bar .info {
-    color: #444;
-    font-size: 16px;
+    color: #555;
+    font-size: 15px;
     font-weight: 600;
 }

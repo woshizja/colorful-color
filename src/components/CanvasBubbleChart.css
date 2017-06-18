@@ -1,6 +1,5 @@
 .bubble-chart {
     display: flex;
-    margin-bottom: 50px;
     font-size: 0;
     justify-content: center;
     flex-wrap: wrap;
@@ -26,4 +25,12 @@
     font-size: 16px;
     text-align: center;
     text-transform: uppercase;
+}
+
+.bubble-chart .save-wrap {
+    float: right;
+    overflow: hidden;
+    width: 100%;
+    line-height: 30px;
+    text-align: right;
 }

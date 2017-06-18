@@ -8,7 +8,8 @@ class ImageShowcase extends Component {
       bgC: "",
       K: 6,
       isMounted: false,
-      clusterColors:[]
+      clusterColors:[],
+      showSave:false
     };
     this.isLoaded = false;
     this.handleOpenClick = this.handleOpenClick.bind(this);
@@ -18,6 +19,8 @@ class ImageShowcase extends Component {
     this.handleCensusClick = this.handleCensusClick.bind(this);
     this.readFile = this.readFile.bind(this);
     this.drawColor = this.drawColor.bind(this);
+    this.handleSaveClick = this.handleSaveClick.bind(this);
+    this.handleCanvasClick = this.handleCanvasClick.bind(this);
   }
 
   componentDidMount(){
@@ -69,6 +72,28 @@ class ImageShowcase extends Component {
     setTimeout(()=>{
       this.props.censusColors(this.ctx, this.state.K, canvas.width, canvas.height, this.isHorizontal, this.drawColor);
     },600);
+  }
+
+  handleSaveClick(){
+    let canvas = this.canvasShowcase;
+    let img = new Image();
+    img.src = canvas.toDataURL("image/png");
+    let w = window.open('about:blank', 'image from canvas');
+    w.document.body.appendChild(img);
+  }
+
+  handleCanvasClick(){
+    this.setState({
+      showSave: !this.state.showSave
+    });
+    if(this.timer){
+        clearTimeout(this.timer);
+    }
+    this.timer = setTimeout(()=>{
+      this.setState({
+        showSave: false
+      });
+    },2300);
   }
 
   drawColor(main_color, cluster_colors){
@@ -178,17 +203,22 @@ class ImageShowcase extends Component {
     showcaseClass += " image-showcase";
     let showcaseWrapClass = this.state.bgC ? 'censused' : '';
     showcaseWrapClass += " showcase-wrap";
+    let saveWrapClass = this.state.showSave ? 'show' : '';
+    saveWrapClass += " save-wrap";
     return (
       <div className={showcaseClass}>
         <div className="head"><b>Colorful Color</b></div>
         <div className={showcaseWrapClass} style={{background:this.state.bgC}}>
-          <canvas className="showcase" ref={(canvas) => { this.canvasShowcase = canvas; }}></canvas>
+          <canvas onClick={this.handleCanvasClick} className="showcase" ref={(canvas) => { this.canvasShowcase = canvas; }}></canvas>
         </div>
         <input className="img-input" type="file" multiple="multiple" accept="image/*" onChange={this.readFile} ref={(input) => { this.imgInput = input; }}/>
         <button className="btn-open" onClick={this.handleOpenClick} title="open image"></button>
         <button className="btn-clear" onClick={this.handleClearClick} title="clear image"></button>
         <button className="btn-census" onClick={this.handleCensusClick} title="census color"></button>
         <input type="number"  className="input-K"  value={this.state.K} onBlur={this.handleKBlur} onChange={this.handleKInput} title="K means" />
+        <div className={saveWrapClass}>
+          <span onClick={this.handleSaveClick} className="save">SAVE</span>
+        </div>
       </div>
     );
   }

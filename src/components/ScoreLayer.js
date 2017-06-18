@@ -59,7 +59,7 @@ class ScoreLayer extends Component {
 				    </g>
 				    <g>
 				      <path className="c3" d="m 40 25.35 q 20 -25.35 40 0 q 31.96 4.65 20 34.64 q 11.96 30 -20 34.64 q -20 25.35 -40 0 q -31.96 -4.65 -20 -34.64 q -11.96 -30 20 -34.64"/>
-				      <animateTransform attributeName="transform" begin="0s" dur="11s" type="rotate" values="0 60 60;180 59 61;360 60 60" repeatCount="indefinite"/>
+				      <animateTransform attributeName="transform" begin="0s" dur="11s" type="rotate" values="0 60 60;-180 59 61;-360 60 60" repeatCount="indefinite"/>
 				    </g>
 				    <g>
 				      <circle cx="60" cy="60" r="45" className="c0">
