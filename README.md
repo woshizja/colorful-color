@@ -12,7 +12,7 @@ See my [blog](https://codepen.io/zhaojun/post/cc).
 ![color palette](http://oenqoxl4h.bkt.clouddn.com/qr.png) 
 
 **the color palette:**  
-![color palette](http://oenqoxl4h.bkt.clouddn.com/%E4%B8%8B%E8%BD%BD2.png)
+![color palette](http://oenqoxl4h.bkt.clouddn.com/color-p.png)
 
 **the color bubbles chart:**  
 ![color palette](http://oenqoxl4h.bkt.clouddn.com/%E4%B8%8B%E8%BD%BD%20%281%29.png)
